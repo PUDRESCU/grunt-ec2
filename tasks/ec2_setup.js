@@ -57,12 +57,27 @@ module.exports = function (grunt) {
             'sudo apt-get install python-software-properties',
             'sudo add-apt-repository ppa:chris-lea/node.js -y',
             'sudo apt-get update',
+            'sudo apt-get install build-essential -y',
             'sudo apt-get install nodejs -y'
         ], [ // pm2
             'sudo apt-get install make g++ -y',
             'sudo npm install -g pm2',
-            'sudo pm2 startup'
+            'sudo pm2 startup ubuntu'
         ]];
+        if (conf('INSTALL_MONGODB')) {
+            steps.push( [ // mongodb
+                'sudo apt-get install mongodb -y',
+                'sudo mkdir -p /data/db',
+                'sudo mongod --fork --logpath /var/log/mongod.log'
+            ]);
+        }
+        if (conf('INSTALL_MEMCACHED')) {
+            steps.push( [ // memcached
+                'sudo apt-get install memcached -y',
+                'sudo service memcached start'
+            ]);
+        }
+
 
         function forwardPort(from, to) {
             return [

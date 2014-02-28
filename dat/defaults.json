@@ -5,5 +5,7 @@
     "AWS_SSH_USER": "ubuntu",
     "AWS_RSYNC_USER": "ubuntu",
     "PAGESPEED_ENABLED": false,
-    "ELASTIC_IP": true
+    "ELASTIC_IP": true,
+    "INSTALL_MONGODB": false,
+    "INSTALL_MEMCACHED": false
 }
